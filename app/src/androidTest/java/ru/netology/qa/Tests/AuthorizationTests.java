@@ -6,6 +6,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static org.hamcrest.Matchers.allOf;
 
+import static ru.netology.qa.WaitId.waitFor;
+
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
@@ -32,37 +34,29 @@ import ru.netology.qa.steps.AuthorizationSteps;
         public ActivityTestRule<AppActivity> activityTestRule =
                 new ActivityTestRule<>(AppActivity.class);
 
-        //Реализован в MainTests @Before
     @Test
     @Story("2")
     @Description("Авторизация валидными данными")
     public void successfulAuthorization () {
-        sleep(5000);
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginField();
-        AuthorizationSteps.clickPasswordField();
-        sleep(5000);
+        AuthorizationSteps.clickLoginField("login2");
+        AuthorizationSteps.clickPasswordField("password2");
         AuthorizationPage.clickButtonSingIn();
-        sleep(5000);
         AuthorizationPage.clickButtonExit();
-        sleep(3000);
         AuthorizationSteps.clickButtonLogOut();
+
     }
 
     @Test
     @Story("3")
     @Description("Поле Логин пустое, при авторизации")
     public void loginFieldIsEmpty () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginEmpty();
-        AuthorizationSteps.clickPasswordField();
+        AuthorizationSteps.clickLoginField(" ");
+        AuthorizationSteps.clickPasswordField("password2");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Login and password cannot be empty"), isDisplayed()));
     }
 
@@ -70,16 +64,11 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("4")
     @Description("Поле Логин заполнено данными незарегистрированного пользователя, при авторизации")
     public void loginFieldUnregisteredUser () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginFieldUnregisteredUser();
-        AuthorizationSteps.clickPasswordField();
+        AuthorizationSteps.clickLoginField("login123");
+        AuthorizationSteps.clickPasswordField("password2");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
 
@@ -87,16 +76,11 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("5")
     @Description("Поле Логин состоит из спецсимволов, при авторизации")
     public void loginFieldWithSpecialCharacters () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginFieldWithSpecialCharacters();
-        AuthorizationSteps.clickPasswordField();
+        AuthorizationSteps.clickLoginField("^&*@#$");
+        AuthorizationSteps.clickPasswordField("password2");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
 
@@ -104,16 +88,11 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("6")
     @Description("Поле Логин состоит из одного символа, при авторизации")
     public void loginFieldOneLetter () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginFieldOneLetter();
-        AuthorizationSteps.clickPasswordField();
+        AuthorizationSteps.clickLoginField("1");
+        AuthorizationSteps.clickPasswordField("password2");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
 
@@ -121,16 +100,11 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("7")
     @Description("Поле Логин состоит из букв разного регистра, при авторизации")
     public void loginFieldLettersOfDifferentCase () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginFieldLettersOfDifferentCase();
-        AuthorizationSteps.clickPasswordField();
+        AuthorizationSteps.clickLoginField("LoGiN2");
+        AuthorizationSteps.clickPasswordField("password2");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
 
@@ -138,14 +112,10 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("8")
     @Description("Поле Пароль пустое, при авторизации")
     public void passwordFieldIsEmpty () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginField();
-        AuthorizationSteps.clickPasswordFieldIsEmpty();
+        AuthorizationSteps.clickLoginField("login2");
+        AuthorizationSteps.clickPasswordField(" ");
         AuthorizationPage.clickButtonSingIn();
         sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
@@ -155,16 +125,11 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("9")
     @Description("Поле Пароль заполнено данными незарегистрированного пользователя, при авторизации")
     public void passwordFieldUnregisteredUser () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginField();
-        AuthorizationSteps.clickPasswordFieldUnregisteredUser();
+        AuthorizationSteps.clickLoginField("login2");
+        AuthorizationSteps.clickPasswordField("password123");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
 
@@ -172,16 +137,11 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("10")
     @Description("Поле Пароль состоит из спецсимволов, при авторизации")
     public void passwordFieldWithSpecialCharacters () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginField();
-        AuthorizationSteps.clickPasswordFieldWithSpecialCharacters();
+        AuthorizationSteps.clickLoginField("login2");
+        AuthorizationSteps.clickPasswordField("(*^$%&");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
 
@@ -189,16 +149,11 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("11")
     @Description("Поле Пароль состоит из одного символа, при авторизации")
     public void passwordFieldOneLetter () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginField();
-        AuthorizationSteps.clickPasswordFieldOneLetter();
+        AuthorizationSteps.clickLoginField("login2");
+        AuthorizationSteps.clickPasswordField("1");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
 
@@ -206,17 +161,11 @@ import ru.netology.qa.steps.AuthorizationSteps;
     @Story("12")
     @Description("Поле Пароль состоит из букв разного регистра, при авторизации")
     public void passwordFieldLettersOfDifferentCase () {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitFor(3);
         AuthorizationSteps.textAuthorization();
-        AuthorizationSteps.clickLoginField();
-        AuthorizationSteps.clickPasswordFieldLettersOfDifferentCase();
+        AuthorizationSteps.clickLoginField("login2");
+        AuthorizationSteps.clickPasswordField("PaSSWord2");
         AuthorizationPage.clickButtonSingIn();
-        sleep(3000);
         onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
-
 }

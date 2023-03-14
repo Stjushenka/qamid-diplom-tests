@@ -57,6 +57,7 @@ public class Util {
                         isDescendantOfA(isAssignableFrom(NestedScrollView.class)),
                         withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE));
             }
+
             @Override
             public String getDescription() {
                 return "View is not NestedScrollView";
@@ -100,6 +101,7 @@ public class Util {
         }
         return (View) parent;
     }
+
     private static ViewParent findParent(View view) {
         return view.getParent();
     }

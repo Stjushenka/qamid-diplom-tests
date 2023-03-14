@@ -4,6 +4,10 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.matcher.ViewMatchers.isFocusable;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 import static ru.netology.qa.elemets.ClaimPage.getClaimsElementAddClaimInMainPage;
 import static ru.netology.qa.elemets.ClaimPage.getClaimsElementsButtonAddClaim;
 import static ru.netology.qa.elemets.ClaimPage.getClaimsElementsButtonCancelClaim;
@@ -27,6 +31,8 @@ import static ru.netology.qa.elemets.ClaimPage.getClaimsElementsTimeField;
 import static ru.netology.qa.elemets.ClaimPage.getClaimsElementsTitleField;
 
 import io.qameta.allure.kotlin.Allure;
+import io.qameta.allure.kotlin.Step;
+import ru.iteco.fmhandroid.R;
 
 public class ClaimSteps {
 
@@ -85,16 +91,16 @@ public class ClaimSteps {
                 .perform(click());
     }
 
-    public static void clickTitleField() {
+    public static void clickTitleField(String value) {
         Allure.step("Ввести в поле Тема наименование темы");
         onView(getClaimsElementsTitleField())
-                .perform(replaceText("Осмотр нового пациента окончился печально"), closeSoftKeyboard());
+                .perform(replaceText(value), closeSoftKeyboard());
     }
 
-    public static void clickCheckBoxExecutorField() {
+    public static void clickCheckBoxExecutorField(String value) {
         Allure.step("В поле Исполнитель выбрать из списка ФИО исполнителя");
         onView(getClaimsElementsExecutorField())
-                .perform(replaceText("Иванов Сергей Викторович"), closeSoftKeyboard());
+                .perform(replaceText(value), closeSoftKeyboard());
     }
 
     public static void clickDateField() {
@@ -121,10 +127,10 @@ public class ClaimSteps {
                 .perform(click());
     }
 
-    public static void clickDescriptionField() {
+    public static void clickDescriptionField(String value) {
         Allure.step("Ввести в поле Описание описание заявки");
         onView(getClaimsElementsDescriptionField())
-                .perform(replaceText("Описание не будет полным"), closeSoftKeyboard());
+                .perform(replaceText(value), closeSoftKeyboard());
     }
 
     public static void clickButtonSave() {
@@ -134,10 +140,17 @@ public class ClaimSteps {
     }
 
     public static void clickButtonOkError() {
-        Allure.step("Нажать кнопку ОК");
+        Allure.step("Нажать кнопку ОК в всплывающем окне ошибки");
+        onView(allOf(withId(R.id.message), isFocusable()));
         onView(getClaimsElementsButtonOkError())
                 .perform(click());
     }
+
+    public static void errorIconInField() {
+        Allure.step("Отображается пометка в необходимом для заполнения поле");
+        onView(allOf(withId(R.id.text_input_end_icon), isFocusable()));
+    }
+
 
     public static void clickButtonCancelClaim() {
         Allure.step("Нажать кнопку Отмена");
@@ -151,15 +164,21 @@ public class ClaimSteps {
                 .perform(click());
     }
 
-    public static void clickTitleFieldMaximumCharacters() {
+    public static void clickTitleFieldMaximumCharacters(String value) {
         Allure.step("Ввести в поле Тема максимально-допустимое количество символов");
         onView(getClaimsElementsTitleField())
-                .perform(replaceText("Ж1!К%?*;№АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ1234567891011"), closeSoftKeyboard());
+                .perform(replaceText(value), closeSoftKeyboard());
     }
 
     public static void clickAddClaimInMainPage() {
         Allure.step("Добавить заявку с главной страницы");
         onView(getClaimsElementAddClaimInMainPage())
                 .perform(click());
+    }
+
+    @Step("Найти элемент по тексту и выбрать его")
+    public static void chooseItemIfVisible(String value) {
+        Allure.step("Найти элемент по тексту и выбрать его");
+        onView(allOf(withId(R.id.news_item_title_text_view), withText(value)));
     }
 }
