@@ -1,7 +1,5 @@
 package ru.netology.qa.Tests;
 
-import static ru.netology.qa.WaitId.waitFor;
-
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
@@ -11,8 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
+import io.qameta.allure.kotlin.junit4.Tag;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.netology.qa.steps.AuthorizationSteps;
 import ru.netology.qa.steps.ClaimSteps;
@@ -29,13 +27,12 @@ public class NewsTest {
 
     @Before
     public void authorization() {
-        waitFor(3);
         AuthorizationSteps.login();
     }
 
     @Test
-    @Story("26")
-    @Description("Создание новости")
+    @Tag("26")
+    @Story("Создание новости")
     public void creationNewsInControlPanel() {
         MainSteps.clickButtonAllNews();
         NewsSteps.clickEditNewsInNewsPage();

@@ -1,7 +1,5 @@
 package ru.netology.qa.Tests;
 
-import static ru.netology.qa.WaitId.waitFor;
-
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
@@ -11,8 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
+import io.qameta.allure.kotlin.junit4.Tag;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.netology.qa.steps.AuthorizationSteps;
 import ru.netology.qa.steps.ClaimSteps;
@@ -28,13 +26,12 @@ public class ClaimsTests {
 
     @Before
     public void authorization() {
-        waitFor(3);
         AuthorizationSteps.login();
     }
 
     @Test
-    @Story("20")
-    @Description("Фильтрация заявок по критерию Открыта во вкладке Заявки")
+    @Tag("20")
+    @Story("Фильтрация заявок по критерию Открыта во вкладке Заявки")
     public void applicationFilterInProgress() {
         MainSteps.clickButtonClaims();
         ClaimSteps.clickButtonFilter();
@@ -44,8 +41,8 @@ public class ClaimsTests {
     }
 
     @Test
-    @Story("21")
-    @Description("Фильтрация заявок по критерию В работе во вкладке Заявки")
+    @Tag("21")
+    @Story("Фильтрация заявок по критерию В работе во вкладке Заявки")
     public void applicationFilterOpen() {
         MainSteps.clickButtonClaims();
         ClaimSteps.clickButtonFilter();
@@ -55,8 +52,8 @@ public class ClaimsTests {
     }
 
     @Test
-    @Story("22")
-    @Description("Фильтрация заявок по критерию Выполнена во вкладке Заявки")
+    @Tag("22")
+    @Story("Фильтрация заявок по критерию Выполнена во вкладке Заявки")
     public void applicationFilterExecuted() {
         MainSteps.clickButtonClaims();
         ClaimSteps.clickButtonFilter();
@@ -68,8 +65,8 @@ public class ClaimsTests {
     }
 
     @Test
-    @Story("23")
-    @Description("Фильтрация заявок по критерию Отмененные во вкладке Заявки")
+    @Tag("23")
+    @Story("Фильтрация заявок по критерию Отмененные во вкладке Заявки")
     public void applicationFilterCancelled() {
         MainSteps.clickButtonClaims();
         ClaimSteps.clickButtonFilter();
@@ -81,8 +78,8 @@ public class ClaimsTests {
     }
 
     @Test
-    @Story("24")
-    @Description("Создание заявки во вкладке Заявки")
+    @Tag("24")
+    @Story("Создание заявки во вкладке Заявки")
     public void addNewClaim() {
         ClaimSteps.clickButtonMainMenu();
         ClaimSteps.clickButtonClaims();
@@ -99,8 +96,8 @@ public class ClaimsTests {
     }
 
     @Test
-    @Story("25")
-    @Description("Поле Тема пустое, при создании заявки, во вкладке Заявки")
+    @Tag("25")
+    @Story("Поле Тема пустое, при создании заявки, во вкладке Заявки")
     public void titleFieldIsEmpty() {
         ClaimSteps.clickButtonMainMenu();
         ClaimSteps.clickButtonClaims();

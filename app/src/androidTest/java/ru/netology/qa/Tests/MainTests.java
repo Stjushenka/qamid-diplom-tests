@@ -1,7 +1,5 @@
 package ru.netology.qa.Tests;
 
-import static ru.netology.qa.WaitId.waitFor;
-
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
@@ -11,8 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
+import io.qameta.allure.kotlin.junit4.Tag;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.netology.qa.steps.AuthorizationSteps;
 import ru.netology.qa.steps.ClaimSteps;
@@ -29,13 +27,12 @@ public class MainTests {
 
     @Before
     public void authorization() {
-        waitFor(3);
         AuthorizationSteps.login();
     }
 
     @Test
-    @Story("13")
-    @Description("Переход во вкладку Все Новости через главное меню")
+    @Tag("13")
+    @Story("Переход во вкладку Все Новости через главное меню")
     public void gotoAllNewsPage() {
         MainSteps.clickButtonAllNews();
         MainSteps.newsPage();
@@ -43,16 +40,16 @@ public class MainTests {
 
 
     @Test
-    @Story("14")
-    @Description("Переход во вкладку Все Заявки через главное меню")
+    @Tag("14")
+    @Story("Переход во вкладку Все Заявки через главное меню")
     public void buttonAllClaims() {
         MainSteps.clickButtonClaims();
         MainSteps.claimsPage();
     }
 
     @Test
-    @Story("15")
-    @Description("Развернуть и свернуть новостную ленту")
+    @Tag("15")
+    @Story("Развернуть и свернуть новостную ленту")
     public void clickDDListNews() {
         MainSteps.clickDDListNews();
         MainSteps.clickDDListNews();
@@ -60,16 +57,16 @@ public class MainTests {
     }
 
     @Test
-    @Story("16")
-    @Description("Развернуть новость")
+    @Tag("16")
+    @Story("Развернуть новость")
     public void clickDDListNewsInBlock() {
         MainSteps.clickDDListNewInBlock();
         MainSteps.checkDDListNewInBlock();
     }
 
     @Test
-    @Story("17")
-    @Description("Развернуть и свернуть список заявок")
+    @Tag("17")
+    @Story("Развернуть и свернуть список заявок")
     public void clickDDListClaims() {
         MainSteps.clickDDListClaims();
         MainSteps.clickDDListClaims();
@@ -77,8 +74,8 @@ public class MainTests {
     }
 
     @Test
-    @Story("18")
-    @Description("Создание Заявки из главного меню")
+    @Tag("18")
+    @Story("Создание Заявки из главного меню")
     public void addClaimInMainPage() {
         ClaimSteps.clickAddClaimInMainPage();
         ClaimSteps.clickTitleFieldMaximumCharacters("Ж1!К%?*;№АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ1234567891011");
